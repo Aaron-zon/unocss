@@ -7,11 +7,14 @@ function mixComponent(v1: string | number, v2: string | number, w: string | numb
 
 /**
  * Returns RGB color from a mixture of color1 and color2. Support RGB color values.
+ * 从color1和color2的混合色中返回RGB颜色。支持RGB颜色值。
  * https://sass-lang.com/documentation/modules/color#mix
  *
  * @param color1
  * @param color2
- * @param weight - How many of color2 will be used to mix into color1. Value of 0 will resulting in color2, value of 100 color1.
+ * - How many of color2 will be used to mix into color1. Value of 0 will resulting in color2, value of 100 color1.
+ * - 有多少color2将用于混合到color1中。值为0将产生颜色2，值为100将产生颜色1。
+ * @param weight 混合占比
  * @return
  */
 function mixColor(color1: string | CSSColorValue, color2: string | CSSColorValue, weight: string | number): CSSColorValue | undefined {
@@ -37,6 +40,7 @@ function mixColor(color1: string | CSSColorValue, color2: string | CSSColorValue
 
 /**
  * Mix color with white. @see {@link mixColor}
+ * 将颜色与白色混合。
  */
 function tint(color: string | CSSColorValue, weight: string | number) {
   return mixColor('#fff', color, weight)
@@ -44,6 +48,7 @@ function tint(color: string | CSSColorValue, weight: string | number) {
 
 /**
  * Mix color with black. @see {@link mixColor}
+ * 将颜色与黑色混合。
  */
 function shade(color: string | CSSColorValue, weight: string | number) {
   return mixColor('#000', color, weight)
@@ -51,6 +56,7 @@ function shade(color: string | CSSColorValue, weight: string | number) {
 
 /**
  * Mix color with black or white, according to weight. @see {@link mixColor}
+ * 根据重量将颜色与黑色或白色混合。
  */
 function shift(color: string | CSSColorValue, weight: string | number) {
   const num = Number.parseFloat(`${weight}`)
@@ -63,6 +69,9 @@ const fns: Record<string, (color: string | CSSColorValue, weight: string | numbe
 /**
  * Shade the color if the weight is positive, tint the color otherwise.
  * Shading mixes the color with black, Tinting mixes the color with white.
+ * 
+ * 如果权重为正，则使颜色变暗，否则使颜色变浅。
+ * 阴影将颜色与黑色混合，着色将颜色与白色混合。
  * @see {@link mixColor}
  */
 export function variantColorMix<Theme extends object>(): VariantObject<Theme> {
